@@ -30,12 +30,13 @@ moment().format('hYYYY/hM/hD');
 ```
 
 ### Browser
-
-    <script src="moment.js"></script>
-    <script src="moment-hijri.js"></script>
-    <script>
-      moment().format('hYYYY/hM/hD');
-    </script>
+```html
+<script src="moment.js"></script>
+<script src="moment-hijri.js"></script>
+<script>
+	moment().format('hYYYY/hM/hD');
+</script>
+```
 
 ### Require.js
 
@@ -93,7 +94,10 @@ moment('1990 5 25', 'YYYY hM D').format('YYYY/MM/DD'); // 1990/03/25
 To add Arabic language, use loadArabic method:
 
 ```js
-moment.loadArabic()
+moment.loadArabic();
+m = moment('1410/8/28', 'hYYYY/hM/hD');
+m.format('hYYYY/hM/hDهـ الموافق YYYY/M/Dم');
+// ١٤١٠/٨/٢٨هـ الموافق ١٩٩٠/٣/٢٥م
 ```
 
 Acknowledgements
