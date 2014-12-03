@@ -1,3 +1,4 @@
+[![NPM version][npm-version-image]][npm-url] [![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url]
 moment-hijri
 ==============
 
@@ -108,3 +109,12 @@ License
 -------
 
 MIT
+
+[license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-url]: LICENSE
+
+[npm-url]: https://npmjs.org/package/moment-hijri
+[npm-version-image]: http://img.shields.io/npm/v/moment-hijri.svg?style=flat
+
+[travis-url]: https://travis-ci.org/xsoh/moment-hijri
+[travis-image]: https://travis-ci.org/xsoh/moment-hijri.svg?style=flat
