@@ -1,6 +1,9 @@
 'use strict';
 
 module.exports = function (grunt) {
+	
+	var fs = require('fs');
+	var mochaPath = fs.realpathSync('./node_modules/.bin/mocha');
 
   grunt.initConfig(
     { pkg: grunt.file.readJSON('package.json')
@@ -47,7 +50,7 @@ module.exports = function (grunt) {
 
     , shell:
       { mocha:
-        { command: './node_modules/.bin/mocha'
+        { command: mochaPath
                  + ' -R spec'
                  + ' -u bdd'
                  + ' -c'
