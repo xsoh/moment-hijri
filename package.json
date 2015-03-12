@@ -43,7 +43,7 @@
     "bower": "~1.2.6"
   },
   "dependencies": {
-    "moment": "~2.1.0"
+    "moment": "~2.9.0"
   },
   "jshintConfig": {
     "camelcase": true,
