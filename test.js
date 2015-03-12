@@ -5,7 +5,7 @@ var chai = require('chai')
 
 chai.should()
 
-moment.lang('en'
+moment.locale('en'
 , { week:
     { dow: 6
     , doy: 12
@@ -21,6 +21,7 @@ moment.lang('en'
 )
 
 describe('moment', function() {
+	
   describe('#parse', function() {
     it('should parse gregorian dates', function() {
       var m = moment('1981/8/17 07:10:20', 'YYYY/M/D hh:mm:ss')
@@ -32,47 +33,6 @@ describe('moment', function() {
       var m = moment('07:10:20', 'hh:mm:ss')
       m.format('YYYY-MM-DD hh:mm:ss').should.be.equal('0000-01-01 07:10:20')
     })
-
-/*    it('should parse when only Hijri year is in the format', function() {
-      var m = moment('08 1401 17', 'MM hYYYY DD')
-      m.format('YYYY-MM-DD').should.be.equal('1981-08-17')
-      m = moment('08 01 17', 'MM hYY DD')
-      m.format('YYYY-MM-DD').should.be.equal('1981-08-17')
-    })
-
-    it('should parse when only Hijri month is in the format', function() {
-      var m = moment('1981 10 17', 'YYYY hM D')
-      m.format('YYYY-MM-DD').should.be.equal('1981-07-17')
-    })
-
-    it('should parse when only Hijri month string is in the format', function() {
-      var m = moment('1981 Amo 17', 'YYYY hMMM D')
-      m.format('YYYY-MM-DD').should.be.equal('1981-07-17')
-      m = moment('1981 Amordaad 17', 'YYYY hMMMM D')
-      m.format('YYYY-MM-DD').should.be.equal('1981-07-17')
-    })
-
-    it('should parse when only Hijri date is in the format', function() {
-      var m = moment('1981 26 8', 'YYYY hD M')
-      m.format('YYYY-MM-DD').should.be.equal('1981-08-15')
-    })
-
-    it('should parse when Hijri year and month are in the format', function() {
-      var m = moment('17 1360 5', 'D hYYYY hM')
-      m.format('YYYY-MM-DD').should.be.equal('1981-07-17')
-      m = moment('1392 7', 'hYYYY hM')
-      m.format('YYYY-MM-DD').should.be.equal('2013-09-23')
-    })
-
-    it('should parse when Hijri year and date are in the format', function() {
-      var m = moment('26 1360 8', 'hD hYYYY M')
-      m.format('YYYY-MM-DD').should.be.equal('1981-08-15')
-    })
-
-    it('should parse when Hijri month and date are in the format', function() {
-      var m = moment('26 1981 5', 'hD YYYY hM')
-      m.format('YYYY-MM-DD').should.be.equal('1981-08-17')
-    })*/
 
     it('should parse when Hijri year, month and date are in the format', function() {
       var m = moment('17 1401 10', 'hD hYYYY hM')
@@ -99,8 +59,8 @@ describe('moment', function() {
       var p1 = 'hYY hM hD'
         , p2 = 'hM hD hYY'
         , p3 = 'hD hYY hM'
-        , m
-      m = moment('60 11 12', ['D YY M', 'M D YY', 'YY M D'])
+        , m;
+      m = moment('60 11 12', ['D YY M', 'M D YY', 'YY M D']);
       m.format('YY-MM-DD').should.be.equal('60-11-12')
       m = moment('10 11 12', [p1, p2, p3])
       m.format('hYY-hMM-hDD').should.be.equal('10-11-12')
@@ -127,133 +87,133 @@ describe('moment', function() {
 
   describe('#format', function() {
     it('should work normally when there is no Hijri token', function() {
-      var m = moment('1981-08-17 07:10:20')
+      var m = moment('1981-08-17 07:10:20', 'YYYY-MM-DD hh:mm:ss')
       m.format('YYYY-MM-DD hh:mm:ss').should.be.equal('1981-08-17 07:10:20')
     })
 
     it('should format to Hijri with Hijri tokens', function() {
-      var m = moment('1981-08-17 07:10:20')
+      var m = moment('1981-08-17 07:10:20', 'YYYY-MM-DD hh:mm:ss')
       m.format('hYYYY-hMM-hDD hh:mm:ss').should.be.equal('1401-10-17 07:10:20')
     })
 
     it('should format with escaped and unescaped tokens', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('[My] birt\\h y[ea]r [is] hYYYY or YYYY').should.be.equal('My birth year is 1401 or 1981')
     })
 
     it('should format with mixed tokens', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('hYYYY/hMM/hDD = YYYY-MM-DD').should.be.equal('1401/10/17 = 1981-08-17')
     })
 
     it('should format with hMo', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('hMo').should.be.equal('10th')
     })
 
     it('should format with hM', function() {
-      var m = moment('1981-05-17')// Note: The date is different here
+      var m = moment('1981-05-17', 'YYYY-MM-DD')// Note: The date is different here
       m.format('hM').should.be.equal('7')
     })
 
     it('should format with hMM', function() {
-      var m = moment('1981-05-17')// Note: The date is different here
+      var m = moment('1981-05-17', 'YYYY-MM-DD')// Note: The date is different here
       m.format('hMM').should.be.equal('07')
     })
 
     it('should format with hMMM', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('hMMM').should.be.equal('Shw')
     })
 
     it('should format with hMMMM', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('hMMMM').should.be.equal('Shawwal')
     })
 
     it('should format with hDo', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('hDo').should.be.equal('17th')
     })
 
     it('should format with hD', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('hD').should.be.equal('17')
     })
 
     it('should format with hDD', function() {
-      var m = moment('1981-05-17')// Note: The date is different here
+      var m = moment('1981-05-17', 'YYYY-MM-DD')// Note: The date is different here
       m.format('hDD').should.be.equal('13')
-      m = moment('1981-05-13')// Note: The date is different here
+      m = moment('1981-05-13', 'YYYY-MM-DD')// Note: The date is different here
       m.format('hDD').should.be.equal('09')
     })
 
     it('should format with hDDD', function() {
-      var m = moment('1981-11-17')// Note: The date is different here
+      var m = moment('1981-11-17', 'YYYY-MM-DD')// Note: The date is different here
       m.format('hDDD').should.be.equal('21')
     })
 
     it('should format with hDDDo', function() {
-      var m = moment('1981-11-17')
+      var m = moment('1981-11-17', 'YYYY-MM-DD')
       m.format('hDDDo').should.be.equal('21st')
     })
 
     it('should format with hDDDD', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('hDDDD').should.be.equal('282')
-      m = moment('1981-11-17')
+      m = moment('1981-11-17', 'YYYY-MM-DD')
       m.format('hDDDD').should.be.equal('021')
     })
 
     it('should format with hwo', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('hwo').should.be.equal('41st')
     })
 
     it('should format with hw', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('hw').should.be.equal('41')
     })
 
     it('should format with hww', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('hww').should.be.equal('41')
-      m = moment('1981-11-17')
+      m = moment('1981-11-17', 'YYYY-MM-DD')
       m.format('hww').should.be.equal('04')
     })
 
     it('should format with hYY', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('hYY').should.be.equal('01')
     })
 
     it('should format with hYYYY', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('hYYYY').should.be.equal('1401')
     })
 
     it('should format with hYYYYY', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('hYYYYY').should.be.equal('01401')
     })
 
     it('should format with hgg', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('hgg').should.be.equal('01')
     })
 
     it('should format with hgggg', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('hgggg').should.be.equal('1401')
     })
 
     it('should format with hggggg', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('hggggg').should.be.equal('01401')
     })
 
     it('should work with long date formats too', function() {
-      var m = moment('1981-08-17')// TODO: Not working
+      var m = moment('1981-08-17', 'YYYY-MM-DD')// TODO: Not working
       m.format('LT').should.be.equal('12:00 AM')
       m.format('L').should.be.equal('1401/10/17')
       m.format('l').should.be.equal('1401/10/17')
@@ -268,15 +228,15 @@ describe('moment', function() {
 
   describe('#hYear', function() {
     it('should return Hijri year', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.hYear().should.be.equal(1401)
     })
 
     it('should set Hijri year', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.hYear(1435)
       m.format('hYYYY/hM/hD').should.be.equal('1435/10/17')
-      m = moment('2013-03-20')
+      m = moment('2013-03-20', 'YYYY-MM-DD')
       m.format('hYY/hM/hD').should.be.equal('34/5/8')
       m.hYear(1392)
       m.format('hYY/hM/hD').should.be.equal('92/5/8')
@@ -289,19 +249,19 @@ describe('moment', function() {
 	
   describe('#hMonth', function() {
     it('should return Hijri month', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.hMonth().should.be.equal(9)
     })
 
     it('should set Hijri month', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.hMonth(7)
       m.format('hYYYY/hM/hD').should.be.equal('1401/8/17')
-      m = moment('2012-08-21')
+      m = moment('2012-08-21', 'YYYY-MM-DD')
       m.format('hYY/hM/hD').should.be.equal('33/10/3')
       m.hMonth(11)
       m.format('hYY/hM/hD').should.be.equal('33/12/3')
-      m = moment('2013-08-22')
+      m = moment('2013-08-22', 'YYYY-MM-DD')
       m.format('hYY/hM/hD').should.be.equal('34/10/15')
       m.hMonth(11)
       m.format('hYY/hM/hD').should.be.equal('34/12/15')
@@ -314,15 +274,15 @@ describe('moment', function() {
 
   describe('#hDate', function() {
     it('should return Hijri date', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.hDate().should.be.equal(17)
     })
 
     it('should set Hijri date', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.hDate(29)
       m.format('hYYYY/hM/hD').should.be.equal('1401/10/29')
-      m = moment('1981-07-17')
+      m = moment('1981-07-17', 'YYYY-MM-DD')
       m.format('hYY/hM/hD').should.be.equal('01/9/16')
       m.hDate(29)
       m.format('hYY/hM/hD').should.be.equal('01/9/29')
@@ -343,20 +303,20 @@ describe('moment', function() {
 
   describe('#hDayOfYear', function() {
     it('should return Hijri date of year', function() {
-      var m = moment('1981-08-17')
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.hDayOfYear().should.be.equal(282)
-      m = moment('1980-11-9')
+      m = moment('1980-11-9', 'YYYY-MM-DD')
       m.hDayOfYear().should.be.equal(1)
-      m = moment('2013-11-03')//1434
+      m = moment('2013-11-03', 'YYYY-MM-DD')//1434
       m.hDayOfYear().should.be.equal(354)
-      m = moment('2014-10-24')//1435
+      m = moment('2014-10-24', 'YYYY-MM-DD')//1435
       m.hDayOfYear().should.be.equal(355)
-			m = moment('2014-10-25')//1436
+			m = moment('2014-10-25', 'YYYY-MM-DD')//1436
       m.hDayOfYear().should.be.equal(1)
     })
 
     it('should set Hijri date of year', function() {
-      var m = moment('2014-10-24')
+      var m = moment('2014-10-24', 'YYYY-MM-DD')
       m.hDayOfYear(30)
       m.format('hYYYY/hM/hD').should.be.equal('1435/1/30')
       m.hDayOfYear(354)
