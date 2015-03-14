@@ -1,6 +1,6 @@
 {
   "name": "moment-hijri",
-  "version": "0.4",
+  "version": "0.4.0",
   "description": "A Hijri calendar (Based on Umm al-Qura calculations) plugin for moment.js.",
   "author": {
     "name": "Suhail Alkowaileet",
@@ -12,7 +12,7 @@
     "hijriah",
     "arabic",
     "lunar",
-		"Umm al-Qura",
+    "Umm al-Qura",
     "date",
     "calendar",
     "conversion",
