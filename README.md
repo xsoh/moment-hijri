@@ -1,4 +1,5 @@
 [![NPM version][npm-version-image]][npm-url] [![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url]
+
 moment-hijri
 ==============
 
@@ -92,10 +93,13 @@ moment('2014-11-28 16:40:00', 'YYYY-M-D HH:mm:ss').endOf('hMonth').format('hYYYY
 moment('1990 5 25', 'YYYY hM D').format('YYYY/MM/DD'); // 1990/03/25
 ```
 
-To add Arabic language, use loadArabic method:
+To display data in Arabic language, load 'ar-sa' locale first:
+
+```html
+<script src="locale/ar-sa.js"></script>
+```
 
 ```js
-moment.loadArabic();
 m = moment('1410/8/28', 'hYYYY/hM/hD');
 m.format('hYYYY/hM/hDهـ الموافق YYYY/M/Dم');
 // ١٤١٠/٨/٢٨هـ الموافق ١٩٩٠/٣/٢٥م
