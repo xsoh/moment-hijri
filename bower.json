@@ -1,8 +1,8 @@
 {
   "name": "moment-hijri",
   "main": "moment-hijri.js",
-  "version": "0.4",
-  "homepage": "https://github.com/msarhan/moment-hijri",
+  "version": "0.4.0",
+  "homepage": "https://github.com/xsoh/moment-hijri",
   "authors": [
     "Suhail Alkowaileet <xsoh.k7@gmail.com>"
   ],
@@ -12,7 +12,7 @@
     "hijriah",
     "arabic",
     "lunar",
-		"Umm al-Qura",
+    "Umm al-Qura",
     "date",
     "calendar",
     "conversion",
