@@ -745,6 +745,14 @@
 		}
 	}
 
+	hMoment.fn.endOf = function (units) {
+		units = normalizeUnits(units)
+		if (units === undefined || units === 'milisecond') {
+			return this
+		}
+		return this.startOf(units).add(1, (units === 'isoweek' ? 'week' : units)).subtract(1, 'milliseconds')
+	}
+	
 	hMoment.fn.clone = function () {
 		return hMoment(this)
 	}
