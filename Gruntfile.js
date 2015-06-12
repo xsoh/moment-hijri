@@ -71,18 +71,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint')
   grunt.loadNpmTasks('grunt-shell')
 
-  grunt.registerTask('default', [ 'test' ] )
-
-  grunt.registerTask('build', [ 'jshint'
-                              , 'uglify:min'
-                              ]
-  )
-
-  grunt.registerTask('test',  [ 'build'
-                              , 'shell:mocha'
-                              ]
-  )
-
-  grunt.registerTask('dev', [ 'watch:test' ] )
+  grunt.registerTask('default', ['build'])
+  grunt.registerTask('test', ['jshint', 'shell:mocha'])
+  grunt.registerTask('build', ['test', 'uglify:min'])
+  grunt.registerTask('dev', ['watch:test'])
 
 }
