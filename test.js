@@ -226,6 +226,85 @@ describe('moment', function() {
     })
   })
 
+  describe('#hConvert', function() {
+    it('should convert 1999-04-01 to 1419-12-15', function() {
+      var h = moment.hConvert.toHijri(1999, 3, 1);
+      h.hy.should.be.equal(1419);
+      h.hm.should.be.equal(11);
+      h.hd.should.be.equal(15);
+    });
+
+    it('should convert 1989-02-25 to 1409-07-19', function() {
+      var h = moment.hConvert.toHijri(1989, 1, 25);
+      h.hy.should.be.equal(1409);
+      h.hm.should.be.equal(6);
+      h.hd.should.be.equal(19);
+    })
+	 
+    it('should convert 1419-12-15 to 1999-04-01', function() {
+      var g = moment.hConvert.toGregorian(1419, 11, 15);
+      g.gy.should.be.equal(1999);
+      g.gm.should.be.equal(3);
+      g.gd.should.be.equal(1);
+    });
+
+    it('should convert 1409-07-19 to 1989-02-25', function() {
+      var g = moment.hConvert.toGregorian(1409, 6, 19);
+      g.gy.should.be.equal(1989);
+      g.gm.should.be.equal(1);
+      g.gd.should.be.equal(25);
+    })
+  })
+
+  describe('#startOf', function() {
+    it('should work as expected without Hijri units', function() {
+      var m = moment('2015-04-03 07:10:20')
+      m.startOf('year').format('YYYY-MM-DD HH:mm:ss').should.be.equal('2015-01-01 00:00:00')
+      m = moment('2015-04-03 07:10:20')
+      m.startOf('month').format('YYYY-MM-DD HH:mm:ss').should.be.equal('2015-04-01 00:00:00')
+      m = moment('2015-04-03 07:10:20')
+      m.startOf('day').format('YYYY-MM-DD HH:mm:ss').should.be.equal('2015-04-03 00:00:00')
+      m = moment('2015-04-03 07:10:20')
+      m.startOf('week').format('YYYY-MM-DD HH:mm:ss').should.be.equal('2015-03-28 00:00:00')
+    })
+
+    it('should return start of Hijri year, month and date', function() {
+      var m = moment('2015-04-03 07:10:20')
+      m.startOf('hYear').format('hYYYY-hMM-hDD HH:mm:ss').should.be.equal('1436-01-01 00:00:00')
+      m = moment('2015-04-03 07:10:20')
+      m.startOf('hMonth').format('hYYYY-hMM-hDD HH:mm:ss').should.be.equal('1436-06-01 00:00:00')
+      m = moment('2015-04-03 07:10:20')
+      m.startOf('day').format('hYYYY-hMM-hDD HH:mm:ss').should.be.equal('1436-06-14 00:00:00')
+      m = moment('2015-04-03 07:10:20')
+      m.startOf('week').format('hYYYY-hMM-hDD HH:mm:ss').should.be.equal('1436-06-08 00:00:00')
+    })
+  })
+
+  describe('#endOf', function() {
+    it('should work as expected without Hijri units', function() {
+      var m;
+      m = moment(new Date(2015, 1, 2, 3, 4, 5, 6))
+      m.endOf('year').format('YYYY-MM-DD HH:mm:ss').should.be.equal('2015-12-31 23:59:59')
+      m = moment(new Date(2015, 1, 2, 3, 4, 5, 6))
+      m.endOf('month').format('YYYY-MM-DD HH:mm:ss').should.be.equal('2015-02-28 23:59:59')
+      m = moment(new Date(2015, 1, 2, 3, 4, 5, 6))
+      m.endOf('day').format('YYYY-MM-DD HH:mm:ss').should.be.equal('2015-02-02 23:59:59')
+      m = moment(new Date(2015, 1, 2, 3, 4, 5, 6))
+      m.endOf('week').format('YYYY-MM-DD HH:mm:ss').should.be.equal('2015-02-06 23:59:59')
+    })
+
+    it('should return end of Hijri year, month and date', function() {
+      var m = moment('2015-04-03 07:10:20')
+      m.endOf('hYear').format('hYYYY-hMM-hDD HH:mm:ss').should.be.equal('1436-12-30 23:59:59')
+      m = moment('2015-04-03 07:10:20')
+      m.endOf('hMonth').format('hYYYY-hMM-hDD HH:mm:ss').should.be.equal('1436-06-30 23:59:59')
+      m = moment('2015-04-03 07:10:20')
+      m.endOf('day').format('hYYYY-hMM-hDD HH:mm:ss').should.be.equal('1436-06-14 23:59:59')
+      m = moment('2015-04-03 07:10:20')
+      m.endOf('week').format('hYYYY-hMM-hDD HH:mm:ss').should.be.equal('1436-06-14 23:59:59')
+    })
+  })
+
   describe('#hYear', function() {
     it('should return Hijri year', function() {
       var m = moment('1981-08-17', 'YYYY-MM-DD')
