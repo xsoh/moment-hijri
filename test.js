@@ -390,6 +390,20 @@ describe('moment', function() {
     it('should also has hMonths alias', function() {
       moment.fn.hMonth.should.be.equal(moment.fn.hMonths)
     })
+
+    it('should set month by name and short name', function() {
+      var m = moment(new Date(2015, 0, 1))
+      m.hMonth('Shawwal')
+      m.format('hYYYY/hM/hD').should.be.equal('1436/10/10')
+
+      m = moment(new Date(2015, 0, 1))
+      m.hMonth('Safar')
+      m.format('hYYYY/hM/hD').should.be.equal('1436/2/10')
+
+      m = moment(new Date(2015, 0, 1))
+      m.hMonth('Jum-I')
+      m.format('hYYYY/hM/hD').should.be.equal('1436/5/10')
+    })
   })
 
   describe('#hDate', function() {

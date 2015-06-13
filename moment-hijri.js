@@ -650,8 +650,11 @@
 		if (input != null) {
 			if (typeof input === 'string') {
 				input = this.localeData().hMonthsParse(input)
-				if (typeof input !== 'number')
+				if(input >= 0) {
+					input -= 1
+				} else {
 					return this
+				}
 			}
 			h = toHijri(this.year(), this.month(), this.date())
 			lastDay = Math.min(h.hd, hMoment.hDaysInMonth(h.hy, input))
