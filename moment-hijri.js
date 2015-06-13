@@ -293,7 +293,7 @@
 				// Make the regex if we don't have it already.
 				if (!this._hMonthsParse[i]) {
 					mom = hMoment([2000, (2 + i) % 12, 25])
-					regex = '^' + this.hMonths(mom, '') + '|^' + this.hMonthsShort(mom, '')
+					regex = '^' + this.hMonths(mom, '') + '$|^' + this.hMonthsShort(mom, '') + '$'
 					this._hMonthsParse[i] = new RegExp(regex.replace('.', ''), 'i')
 				}
 				// Test the regex.
@@ -655,7 +655,13 @@
 			}
 			h = toHijri(this.year(), this.month(), this.date())
 			lastDay = Math.min(h.hd, hMoment.hDaysInMonth(h.hy, input))
-			g = toGregorian(h.hy, input, lastDay)
+			this.hYear(h.hy + div(input, 12))
+			input = mod(input, 12)
+			if (input < 0) {
+				input += 12
+				this.hYear(this.hYear() - 1)
+			}
+			g = toGregorian(this.hYear(), input, lastDay)
 			setDate(this, g.gy, g.gm, g.gd)
 			moment.updateOffset(this)
 			return this

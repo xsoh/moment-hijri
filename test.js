@@ -34,25 +34,66 @@ describe('moment', function() {
       m.format('YYYY-MM-DD hh:mm:ss').should.be.equal('0000-01-01 07:10:20')
     })
 
+    it('should parse when only Hijri year is in the format', function() {
+      var m = moment('08 1436 17', 'MM hYYYY DD')
+      m.format('YYYY-MM-DD').should.be.equal('2014-08-17')
+      m = moment('08 36 17', 'MM hYY DD')
+      m.format('YYYY-MM-DD').should.be.equal('2014-08-17')
+    })
+
+    it('should parse when only Hijri month is in the format', function() {
+      var m = moment('1981 5 17', 'YYYY hM D')
+      m.format('YYYY-MM-DD').should.be.equal('1981-03-17')
+    })
+
+    it('should parse when only Hijri month string is in the format', function() {
+      var m = moment('1981 Raj 17', 'YYYY hMMM D')
+      m.format('YYYY-MM-DD').should.be.equal('1981-03-17')
+      m = moment('1981 Rajab 17', 'YYYY hMMMM D')
+      m.format('YYYY-MM-DD').should.be.equal('1981-03-17')
+    })
+
+    it('should parse when only Hijri date is in the format', function() {
+      var m = moment('1981 26 8', 'YYYY hD M')
+      m.format('YYYY-MM-DD').should.be.equal('1981-08-01')
+    })
+
+    it('should parse when Hijri year and month are in the format', function() {
+      var m = moment('17 1436 5', 'D hYYYY hM')
+      m.format('YYYY-MM-DD').should.be.equal('2015-02-17')
+      m = moment('1432 4', 'hYYYY hM')
+      m.format('YYYY-MM-DD').should.be.equal('2011-03-06')
+    })
+
+    it('should parse when Hijri year and date are in the format', function() {
+      var m = moment('26 1436 8', 'hD hYYYY M')
+      m.format('YYYY-MM-DD').should.be.equal('2014-08-19')
+    })
+
+    it('should parse when Hijri month and date are in the format', function() {
+      var m = moment('26 1981 5', 'hD YYYY hM')
+      m.format('YYYY-MM-DD').should.be.equal('1981-03-01')
+    })
+
     it('should parse when Hijri year, month and date are in the format', function() {
-      var m = moment('17 1401 10', 'hD hYYYY hM')
-      m.format('YYYY-MM-DD').should.be.equal('1981-08-17')
+      var m = moment('26 1430 5', 'hD hYYYY hM')
+      m.format('YYYY-MM-DD').should.be.equal('2009-05-21')
     })
 
     it('should parse with complex format', function() {
-      var m = moment('17 26 50 1981 50 8 50', 'D hD hYYYY YYYY M M hM')
-      m.format('YYYY-MM-DD').should.be.equal('1981-08-17')
+      var m = moment('17 26 50 2014 50 8 12', 'D hD hYYYY YYYY M M jM')
+      m.format('YYYY-MM-DD').should.be.equal('2014-12-17')
     })
 
     it('should parse format result', function() {
-      var format = 'hYYYY/hM/hD hh:mm:ss.SSS a'
+      var f = 'hYYYY/hM/hD hh:mm:ss.SSS a'
         , m = moment()
-      moment(m.format(format), format).isSame(m).should.be['true']
+      moment(m.format(f), f).isSame(m).should.be.true
     })
 
     it('should be able to parse in utc', function() {
-      var m = moment.utc('1401/10/17 07:10:20', 'hYYYY/hM/hD hh:mm:ss')
-      m.format('YYYY-MM-DD hh:mm:ss Z').should.be.equal('1981-08-17 07:10:20 +00:00')
+      var m = moment.utc('1436/8/20 07:10:20', 'hYYYY/hM/hD hh:mm:ss')
+      m.format('YYYY-MM-DD hh:mm:ss Z').should.be.equal('2015-06-07 07:10:20 +00:00')
     })
 
     it('should parse with a format array', function() {
