@@ -14,6 +14,12 @@ This plugin adds Hijri calendar support to [momentjs](http://momentjs.com) libra
 
 Calendar conversion is based on the [Umm al-Qura calculations](http://www.ummulqura.org.sa/).
 
+Upgrading to 2.0.0
+---------------
+Because of [Using 'h' specifier might cause overlap with hour's specifier](https://github.com/xsoh/moment-hijri/issues/8). 
+The specifier has been changed from `h` to `i` as  a prefix. So for example in the previous version to get the four digit year 
+we use `hYYYY`. In version 2.0 or above you should replace it with `iYYYY` and so on.
+
 Where to use it?
 ---------------
 
@@ -28,7 +34,7 @@ npm install moment-hijri
 
 ```js
 var moment = require('moment-hijri');
-moment().format('hYYYY/hM/hD');
+moment().format('iYYYY/iM/iD');
 ```
 
 ### Browser
@@ -36,7 +42,7 @@ moment().format('hYYYY/hM/hD');
 <script src="moment.js"></script>
 <script src="moment-hijri.js"></script>
 <script>
-	moment().format('hYYYY/hM/hD');
+	moment().format('iYYYY/iM/iD');
 </script>
 ```
 
@@ -50,47 +56,47 @@ require.config({
   }
 });
 define(["moment-hijri"], function (moment) {
-  moment().format('hYYYY/hM/hD');
+  moment().format('iYYYY/iM/iD');
 });
 ```
 
 API
 ---
 
-This plugin tries to mimic `momentjs` api. Basically, when you want to format or parse a string, just add a `h` to the format token like 'hYYYY' or 'hM'. For example:
+This plugin tries to mimic `momentjs` api. Basically, when you want to format or parse a string, just add a `h` to the format token like 'iYYYY' or 'iM'. For example:
 
 ```js
-m = moment('1410/8/28', 'hYYYY/hM/hD'); // Parse a Hijri date.
-m.format('hYYYY/hM/hD [is] YYYY/M/D'); // 1410/8/28 is 1990/3/25
+m = moment('1410/8/28', 'iYYYY/iM/iD'); // Parse a Hijri date.
+m.format('iYYYY/iM/iD [is] YYYY/M/D'); // 1410/8/28 is 1990/3/25
 
-m.hYear(); // 1410
-m.hMonth(); // 7
-m.hDate(); // 28
-m.hDayOfYear(); // 236
-m.hWeek(); // 35
-m.hWeekYear(); // 1410
+m.iYear(); // 1410
+m.iMonth(); // 7
+m.iDate(); // 28
+m.iDayOfYear(); // 236
+m.iWeek(); // 35
+m.iWeekYear(); // 1410
 
-m.add(1, 'hYear');
-m.add(2, 'hMonth');
-m.format('hYYYY/hM/hD'); // 1411/10/28
+m.add(1, 'iYear');
+m.add(2, 'iMonth');
+m.format('iYYYY/iM/iD'); // 1411/10/28
 
-m.hMonth(11);
-m.startOf('hMonth');
-m.format('hYYYY/hM/hD'); // 1411/12/1
+m.iMonth(11);
+m.startOf('iMonth');
+m.format('iYYYY/iM/iD'); // 1411/12/1
 
-m.hYear(1392);
-m.startOf('hYear');
-m.format('hYYYY/hM/hD'); // 1420/1/1
+m.iYear(1392);
+m.startOf('iYear');
+m.format('iYYYY/iM/iD'); // 1420/1/1
 
-moment('1436/1/30', 'hYYYY/hMM/hDD').isValid(); // false (This month is only 29 days).
-moment('1436/2/30', 'hYYYY/hMM/hDD').isValid(); // true (This month is 30 days).
+moment('1436/1/30', 'iYYYY/iMM/iDD').isValid(); // false (This month is only 29 days).
+moment('1436/2/30', 'iYYYY/iMM/iDD').isValid(); // true (This month is 30 days).
 
-moment('1436/2/6 16:40', 'hYYYY/hM/hD HH:mm').format('YYYY-M-D HH:mm:ss'); // 2014-11-28 16:40:00
+moment('1436/2/6 16:40', 'iYYYY/iM/iD HH:mm').format('YYYY-M-D HH:mm:ss'); // 2014-11-28 16:40:00
 
-moment('2014-11-28 16:40:00', 'YYYY-M-D HH:mm:ss').endOf('hMonth').format('hYYYY/hM/hD HH:mm:ss'); // 1436/2/30 23:59:59
+moment('2014-11-28 16:40:00', 'YYYY-M-D HH:mm:ss').endOf('iMonth').format('iYYYY/iM/iD HH:mm:ss'); // 1436/2/30 23:59:59
 
 // Complex parse:
-moment('1990 5 25', 'YYYY hM D').format('YYYY/MM/DD'); // 1990/03/25
+moment('1990 5 25', 'YYYY iM D').format('YYYY/MM/DD'); // 1990/03/25
 ```
 
 To display data in Arabic language, load 'ar-sa' locale first:
@@ -100,8 +106,8 @@ To display data in Arabic language, load 'ar-sa' locale first:
 ```
 
 ```js
-m = moment('1410/8/28', 'hYYYY/hM/hD');
-m.format('hYYYY/hM/hDهـ الموافق YYYY/M/Dم');
+m = moment('1410/8/28', 'iYYYY/iM/iD');
+m.format('iYYYY/iM/iDهـ الموافق YYYY/M/Dم');
 // ١٤١٠/٨/٢٨هـ الموافق ١٩٩٠/٣/٢٥م
 ```
 

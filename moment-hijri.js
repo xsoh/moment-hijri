@@ -121,14 +121,14 @@
                       79990]
 	}
 
-	var formattingTokens = /(\[[^\[]*\])|(\\)?h(Mo|MM?M?M?|Do|DDDo|DD?D?D?|w[o|w]?|YYYYY|YYYY|YY|gg(ggg?)?)|(\\)?(Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|SS?S?|X|zz?|ZZ?|.)/g,
+	var formattingTokens = /(\[[^\[]*\])|(\\)?i(Mo|MM?M?M?|Do|DDDo|DD?D?D?|w[o|w]?|YYYYY|YYYY|YY|gg(ggg?)?)|(\\)?(Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|SS?S?|X|zz?|ZZ?|.)/g,
 		localFormattingTokens = /(\[[^\[]*\])|(\\)?(LT|LL?L?L?|l{1,4})/g
 
 	, parseTokenOneOrTwoDigits = /\d\d?/, parseTokenOneToThreeDigits = /\d{1,3}/, parseTokenThreeDigits = /\d{3}/, parseTokenFourDigits = /\d{1,4}/, parseTokenSixDigits = /[+\-]?\d{1,6}/, parseTokenWord = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i, parseTokenTimezone = /Z|[\+\-]\d\d:?\d\d/i, parseTokenT = /T/i, parseTokenTimestampMs = /[\+\-]?\d+(\.\d{1,3})?/
 
 	, unitAliases = {
-		hm: 'hmonth',
-		hy: 'hyear'
+		hm: 'imonth',
+		hy: 'iyear'
 	}
 
 	, formatFunctions = {}
@@ -136,41 +136,41 @@
 	, ordinalizeTokens = 'DDD w M D'.split(' '), paddedTokens = 'M D w'.split(' ')
 
 	, formatTokenFunctions = {
-		hM: function () {
-			return this.hMonth() + 1
+		iM: function () {
+			return this.iMonth() + 1
 		},
-		hMMM: function (format) {
-			return this.localeData().hMonthsShort(this, format)
+		iMMM: function (format) {
+			return this.localeData().iMonthsShort(this, format)
 		},
-		hMMMM: function (format) {
-			return this.localeData().hMonths(this, format)
+		iMMMM: function (format) {
+			return this.localeData().iMonths(this, format)
 		},
-		hD: function () {
-			return this.hDate()
+		iD: function () {
+			return this.iDate()
 		},
-		hDDD: function () {
-			return this.hDayOfYear()
+		iDDD: function () {
+			return this.iDayOfYear()
 		},
-		hw: function () {
-			return this.hWeek()
+		iw: function () {
+			return this.iWeek()
 		},
-		hYY: function () {
-			return leftZeroFill(this.hYear() % 100, 2)
+		iYY: function () {
+			return leftZeroFill(this.iYear() % 100, 2)
 		},
-		hYYYY: function () {
-			return leftZeroFill(this.hYear(), 4)
+		iYYYY: function () {
+			return leftZeroFill(this.iYear(), 4)
 		},
-		hYYYYY: function () {
-			return leftZeroFill(this.hYear(), 5)
+		iYYYYY: function () {
+			return leftZeroFill(this.iYear(), 5)
 		},
-		hgg: function () {
-			return leftZeroFill(this.hWeekYear() % 100, 2)
+		igg: function () {
+			return leftZeroFill(this.iWeekYear() % 100, 2)
 		},
-		hgggg: function () {
-			return this.hWeekYear()
+		igggg: function () {
+			return this.iWeekYear()
 		},
-		hggggg: function () {
-			return leftZeroFill(this.hWeekYear(), 5)
+		iggggg: function () {
+			return leftZeroFill(this.iWeekYear(), 5)
 		}
 	}, i
 
@@ -188,13 +188,13 @@
 
 	while (ordinalizeTokens.length) {
 		i = ordinalizeTokens.pop()
-		formatTokenFunctions['h' + i + 'o'] = ordinalizeToken(formatTokenFunctions['h' + i], i)
+		formatTokenFunctions['i' + i + 'o'] = ordinalizeToken(formatTokenFunctions['i' + i], i)
 	}
 	while (paddedTokens.length) {
 		i = paddedTokens.pop()
-		formatTokenFunctions['h' + i + i] = padToken(formatTokenFunctions['h' + i], 2)
+		formatTokenFunctions['i' + i + i] = padToken(formatTokenFunctions['i' + i], 2)
 	}
-	formatTokenFunctions.hDDDD = padToken(formatTokenFunctions.hDDD, 3)
+	formatTokenFunctions.iDDDD = padToken(formatTokenFunctions.iDDD, 3)
 
 	/************************************
       Helpers
@@ -249,7 +249,7 @@
       Languages
   ************************************/
 	extend(getPrototypeOf(moment.localeData()), {
-		_hMonths: ['Muharram'
+		_iMonths: ['Muharram'
                 , 'Safar'
                 , 'Rabi\' al-Awwal'
                 , 'Rabi\' al-Thani'
@@ -262,12 +262,12 @@
                 , 'Thul-Qi’dah'
                 , 'Thul-Hijjah'
                 ],
-		hMonths: function (m) {
-			return this._hMonths[m.hMonth()]
+		iMonths: function (m) {
+			return this._iMonths[m.iMonth()]
 		}
 
 		,
-		_hMonthsShort: ['Muh'
+		_iMonthsShort: ['Muh'
                       , 'Saf'
                       , 'Rab-I'
                       , 'Rab-II'
@@ -280,24 +280,24 @@
                       , 'Dhu-Q'
                       , 'Dhu-H'
                       ],
-		hMonthsShort: function (m) {
-			return this._hMonthsShort[m.hMonth()]
+		iMonthsShort: function (m) {
+			return this._iMonthsShort[m.iMonth()]
 		}
 
 		,
-		hMonthsParse: function (monthName) {
+		iMonthsParse: function (monthName) {
 			var i, mom, regex
-			if (!this._hMonthsParse)
-				this._hMonthsParse = []
+			if (!this._iMonthsParse)
+				this._iMonthsParse = []
 			for (i = 0; i < 12; i += 1) {
 				// Make the regex if we don't have it already.
-				if (!this._hMonthsParse[i]) {
+				if (!this._iMonthsParse[i]) {
 					mom = hMoment([2000, (2 + i) % 12, 25])
-					regex = '^' + this.hMonths(mom, '') + '$|^' + this.hMonthsShort(mom, '') + '$'
-					this._hMonthsParse[i] = new RegExp(regex.replace('.', ''), 'i')
+					regex = '^' + this.iMonths(mom, '') + '$|^' + this.iMonthsShort(mom, '') + '$'
+					this._iMonthsParse[i] = new RegExp(regex.replace('.', ''), 'i')
 				}
 				// Test the regex.
-				if (this._hMonthsParse[i].test(monthName))
+				if (this._iMonthsParse[i].test(monthName))
 					return i
 			}
 		}
@@ -305,8 +305,8 @@
 
 	var oldLocale = moment.locale();
 	moment.defineLocale('ar-sa', {
-		hMonths: 'محرم_صفر_ربيع الأول_ربيع الثاني_جمادى الأولى_جمادى الآخرة_رجب_شعبان_رمضان_شوال_ذو القعدة_ذو الحجة'.split('_'),
-		hMonthsShort: 'محرم_صفر_ربيع ١_ربيع ٢_جمادى ١_جمادى ٢_رجب_شعبان_رمضان_شوال_ذو القعدة_ذو الحجة'.split('_')
+		iMonths: 'محرم_صفر_ربيع الأول_ربيع الثاني_جمادى الأولى_جمادى الآخرة_رجب_شعبان_رمضان_شوال_ذو القعدة_ذو الحجة'.split('_'),
+		iMonthsShort: 'محرم_صفر_ربيع ١_ربيع ٢_جمادى ١_جمادى ٢_رجب_شعبان_رمضان_شوال_ذو القعدة_ذو الحجة'.split('_')
 	});
 	moment.locale(oldLocale);
 	
@@ -337,22 +337,22 @@
 
 	function getParseRegexForToken(token, config) {
 		switch (token) {
-		case 'hDDDD':
+		case 'iDDDD':
 			return parseTokenThreeDigits
-		case 'hYYYY':
+		case 'iYYYY':
 			return parseTokenFourDigits
-		case 'hYYYYY':
+		case 'iYYYYY':
 			return parseTokenSixDigits
-		case 'hDDD':
+		case 'iDDD':
 			return parseTokenOneToThreeDigits
-		case 'hMMM':
-		case 'hMMMM':
+		case 'iMMM':
+		case 'iMMMM':
 			return parseTokenWord
-		case 'hMM':
-		case 'hDD':
-		case 'hYY':
-		case 'hM':
-		case 'hD':
+		case 'iMM':
+		case 'iDD':
+		case 'iYY':
+		case 'iM':
+		case 'iD':
 			return parseTokenOneOrTwoDigits
 		case 'DDDD':
 			return parseTokenThreeDigits
@@ -405,30 +405,30 @@
 		var a, datePartArray = config._a
 
 		switch (token) {
-		case 'hM':
-		case 'hMM':
+		case 'iM':
+		case 'iMM':
 			datePartArray[1] = input == null ? 0 : ~~input - 1
 			break
-		case 'hMMM':
-		case 'hMMMM':
-			a = moment.localeData(config._l).hMonthsParse(input)
+		case 'iMMM':
+		case 'iMMMM':
+			a = moment.localeData(config._l).iMonthsParse(input)
 			if (a != null)
 				datePartArray[1] = a
 			else
 				config._isValid = false
 			break
-		case 'hD':
-		case 'hDD':
-		case 'hDDD':
-		case 'hDDDD':
+		case 'iD':
+		case 'iDD':
+		case 'iDDD':
+		case 'iDDDD':
 			if (input != null)
 				datePartArray[2] = ~~input
 			break
-		case 'hYY':
+		case 'iYY':
 			datePartArray[0] = ~~input + (~~input > 47 ? 1300 : 1400)
 			break
-		case 'hYYYY':
-		case 'hYYYYY':
+		case 'iYYYY':
+		case 'iYYYYY':
 			datePartArray[0] = ~~input
 		}
 		if (input == null)
@@ -445,7 +445,7 @@
 		hy = hy || 0
 		hm = hm || 0
 		hd = hd || 1
-		if (hd < 1 || hd > hMoment.hDaysInMonth(hy, hm))
+		if (hd < 1 || hd > hMoment.iDaysInMonth(hy, hm))
 			config._isValid = false
 		g = toGregorian(hy, hm, hd)
 		h = toHijri(g.gy, g.gm, g.gd)
@@ -540,7 +540,7 @@
       Week of Year
   ************************************/
 
-	function hWeekOfYear(mom, firstDayOfWeek, firstDayOfWeekOfYear) {
+	function iWeekOfYear(mom, firstDayOfWeek, firstDayOfWeekOfYear) {
 		var end = firstDayOfWeekOfYear - firstDayOfWeek,
 			daysToDayOfWeek = firstDayOfWeekOfYear - mom.day(),
 			adjustedMoment
@@ -553,8 +553,8 @@
 		}
 		adjustedMoment = hMoment(mom).add(daysToDayOfWeek, 'd')
 		return {
-			week: Math.ceil(adjustedMoment.hDayOfYear() / 7),
-			year: adjustedMoment.hYear()
+			week: Math.ceil(adjustedMoment.iDayOfYear() / 7),
+			year: adjustedMoment.iYear()
 		}
 	}
 
@@ -631,11 +631,11 @@
 		return moment.fn.format.call(this, format)
 	}
 
-	hMoment.fn.hYear = function (input) {
+	hMoment.fn.iYear = function (input) {
 		var lastDay, h, g
 		if (typeof input === 'number') {
 			h = toHijri(this.year(), this.month(), this.date())
-			lastDay = Math.min(h.hd, hMoment.hDaysInMonth(input, h.hm))
+			lastDay = Math.min(h.hd, hMoment.iDaysInMonth(input, h.hm))
 			g = toGregorian(input, h.hm, lastDay)
 			setDate(this, g.gy, g.gm, g.gd)
 			moment.updateOffset(this)
@@ -645,11 +645,11 @@
 		}
 	}
 
-	hMoment.fn.hMonth = function (input) {
+	hMoment.fn.iMonth = function (input) {
 		var lastDay, h, g
 		if (input != null) {
 			if (typeof input === 'string') {
-				input = this.localeData().hMonthsParse(input)
+				input = this.localeData().iMonthsParse(input)
 				if(input >= 0) {
 					input -= 1
 				} else {
@@ -657,14 +657,14 @@
 				}
 			}
 			h = toHijri(this.year(), this.month(), this.date())
-			lastDay = Math.min(h.hd, hMoment.hDaysInMonth(h.hy, input))
-			this.hYear(h.hy + div(input, 12))
+			lastDay = Math.min(h.hd, hMoment.iDaysInMonth(h.hy, input))
+			this.iYear(h.hy + div(input, 12))
 			input = mod(input, 12)
 			if (input < 0) {
 				input += 12
-				this.hYear(this.hYear() - 1)
+				this.iYear(this.iYear() - 1)
 			}
-			g = toGregorian(this.hYear(), input, lastDay)
+			g = toGregorian(this.iYear(), input, lastDay)
 			setDate(this, g.gy, g.gm, g.gd)
 			moment.updateOffset(this)
 			return this
@@ -673,7 +673,7 @@
 		}
 	}
 
-	hMoment.fn.hDate = function (input) {
+	hMoment.fn.iDate = function (input) {
 		var h, g
 		if (typeof input === 'number') {
 			h = toHijri(this.year(), this.month(), this.date())
@@ -686,18 +686,18 @@
 		}
 	}
 
-	hMoment.fn.hDayOfYear = function (input) {
-		var dayOfYear = Math.round((hMoment(this).startOf('day') - hMoment(this).startOf('hYear')) / 864e5) + 1
+	hMoment.fn.iDayOfYear = function (input) {
+		var dayOfYear = Math.round((hMoment(this).startOf('day') - hMoment(this).startOf('iYear')) / 864e5) + 1
 		return input == null ? dayOfYear : this.add(input - dayOfYear, 'd')
 	}
 
-	hMoment.fn.hWeek = function (input) {
-		var week = hWeekOfYear(this, this.localeData()._week.dow, this.localeData()._week.doy).week
+	hMoment.fn.iWeek = function (input) {
+		var week = iWeekOfYear(this, this.localeData()._week.dow, this.localeData()._week.doy).week
 		return input == null ? week : this.add( (input - week) * 7, 'd')
 	}
 
-	hMoment.fn.hWeekYear = function (input) {
-		var year = hWeekOfYear(this, this.localeData()._week.dow, this.localeData()._week.doy).year
+	hMoment.fn.iWeekYear = function (input) {
+		var year = iWeekOfYear(this, this.localeData()._week.dow, this.localeData()._week.doy).year
 		return input == null ? year : this.add(input - year, 'y')
 	}
 
@@ -709,10 +709,10 @@
 			units = temp
 		}
 		units = normalizeUnits(units)
-		if (units === 'hyear') {
-			this.hYear(this.hYear() + val)
-		} else if (units === 'hmonth') {
-			this.hMonth(this.hMonth() + val)
+		if (units === 'iyear') {
+			this.iYear(this.iYear() + val)
+		} else if (units === 'imonth') {
+			this.iMonth(this.iMonth() + val)
 		} else {
 			moment.fn.add.call(this, val, units)
 		}
@@ -727,10 +727,10 @@
 			units = temp
 		}
 		units = normalizeUnits(units)
-		if (units === 'hyear') {
-			this.hYear(this.hYear() - val)
-		} else if (units === 'hmonth') {
-			this.hMonth(this.hMonth() - val)
+		if (units === 'iyear') {
+			this.iYear(this.iYear() - val)
+		} else if (units === 'imonth') {
+			this.iMonth(this.iMonth() - val)
 		} else {
 			moment.fn.subtract.call(this, val, units)
 		}
@@ -739,11 +739,11 @@
 
 	hMoment.fn.startOf = function (units) {
 		units = normalizeUnits(units)
-		if (units === 'hyear' || units === 'hmonth') {
-			if (units === 'hyear') {
-				this.hMonth(0)
+		if (units === 'iyear' || units === 'imonth') {
+			if (units === 'iyear') {
+				this.iMonth(0)
 			}
-			this.hDate(1)
+			this.iDate(1)
 			this.hours(0)
 			this.minutes(0)
 			this.seconds(0)
@@ -766,16 +766,16 @@
 		return hMoment(this)
 	}
 
-	hMoment.fn.hYears = hMoment.fn.hYear
-	hMoment.fn.hMonths = hMoment.fn.hMonth
-	hMoment.fn.hDates = hMoment.fn.hDate
-	hMoment.fn.hWeeks = hMoment.fn.hWeek
+	hMoment.fn.iYears = hMoment.fn.iYear
+	hMoment.fn.iMonths = hMoment.fn.iMonth
+	hMoment.fn.iDates = hMoment.fn.iDate
+	hMoment.fn.iWeeks = hMoment.fn.iWeek
 
 	/************************************
       hMoment Statics
   ************************************/
 
-	hMoment.hDaysInMonth = function (year, month) {
+	hMoment.iDaysInMonth = function (year, month) {
 		var i = getNewMoonMJDNIndex(year, month + 1),
 			daysInMonth = ummalqura.ummalquraData[i] - ummalqura.ummalquraData[i - 1]
 		return daysInMonth
@@ -793,7 +793,7 @@
 		return g
 	}
 
-	hMoment.hConvert = {
+	hMoment.iConvert = {
 		toHijri: toHijri,
 		toGregorian: toGregorian
 	}
