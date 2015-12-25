@@ -477,5 +477,16 @@ describe('moment', function() {
       m.format('iYY/iM/iD').should.be.equal('37/12/30')
     })
   })
+  
+  describe('#iDaysInMonth', function() {
+    it('should return Hijri days in Month', function() {
+      var m = moment('1981-08-17', 'YYYY-MM-DD')
+      m.iDaysInMonth().should.be.equal(29)
+      m = moment('1986-2-2', 'YYYY-MM-DD')
+      m.iDaysInMonth().should.be.equal(30)
+    })
+
+  })
+
 	
 })
