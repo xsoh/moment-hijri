@@ -691,6 +691,10 @@
 		return input == null ? dayOfYear : this.add(input - dayOfYear, 'd')
 	}
 
+	hMoment.fn.iDaysInMonth = function () {
+		return parseInt(hMoment(this).endOf('iMonth').format('iDD'));
+	}
+
 	hMoment.fn.iWeek = function (input) {
 		var week = iWeekOfYear(this, this.localeData()._week.dow, this.localeData()._week.doy).week
 		return input == null ? week : this.add( (input - week) * 7, 'd')
