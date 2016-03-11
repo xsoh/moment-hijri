@@ -304,7 +304,7 @@
 	})
 
 	var oldLocale = moment.locale();
-	moment.defineLocale('ar-sa', {
+	moment.updateLocale('ar-sa', {
 		iMonths: 'محرم_صفر_ربيع الأول_ربيع الثاني_جمادى الأولى_جمادى الآخرة_رجب_شعبان_رمضان_شوال_ذو القعدة_ذو الحجة'.split('_'),
 		iMonthsShort: 'محرم_صفر_ربيع ١_ربيع ٢_جمادى ١_جمادى ٢_رجب_شعبان_رمضان_شوال_ذو القعدة_ذو الحجة'.split('_')
 	});
