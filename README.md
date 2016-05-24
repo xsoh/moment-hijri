@@ -99,16 +99,23 @@ moment('2014-11-28 16:40:00', 'YYYY-M-D HH:mm:ss').endOf('iMonth').format('iYYYY
 moment('1990 5 25', 'YYYY iM D').format('YYYY/MM/DD'); // 1990/03/25
 ```
 
-To display data in Arabic language, load 'ar-sa' locale first:
+To use the Arabic locale you need to do as follow:
+- Load [moment-with-locales](http://momentjs.com/downloads/moment-with-locales.js).
+- Set the global or local locale to `ar-SA` see [here](http://momentjs.com/docs/#/i18n/changing-locale/).
+- use it normally :+1: 
 
+Here is example:
 ```html
-<script src="locale/ar-sa.js"></script>
-```
-
-```js
-m = moment('1410/8/28', 'iYYYY/iM/iD');
-m.format('iYYYY/iM/iDهـ الموافق YYYY/M/Dم');
-// ١٤١٠/٨/٢٨هـ الموافق ١٩٩٠/٣/٢٥م
+    <!-- 1- Load the moment-with-locales -->
+    <script src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
+    <script src="https://raw.githubusercontent.com/xsoh/moment-hijri/master/moment-hijri.js"></script>
+    
+    <script>
+      moment.locale('ar-SA');// 2- Set the global locale to `ar-SA`
+      m = moment();
+      m.format('iYYYY/iM/iDهـ الموافق YYYY/M/Dم'); //3- use it normally 
+      //١٤٣٧/٨/١٧هـ الموافق ٢٠١٦/٥/٢٤م
+    </script>
 ```
 
 Acknowledgements
