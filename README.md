@@ -63,7 +63,7 @@ define(["moment-hijri"], function (moment) {
 API
 ---
 
-This plugin tries to mimic `momentjs` api. Basically, when you want to format or parse a string, just add a `h` to the format token like 'iYYYY' or 'iM'. For example:
+This plugin tries to mimic `momentjs` api. Basically, when you want to format or parse a string, just add a `i` to the format token like 'iYYYY' or 'iM'. For example:
 
 ```js
 m = moment('1410/8/28', 'iYYYY/iM/iD'); // Parse a Hijri date.
