@@ -11,7 +11,8 @@ moment.locale('en'
     , doy: 12
     }
   , longDateFormat:
-    { LT: 'h:mm A'
+    { LTS: 'h:mm:ss A'
+    , LT: 'h:mm A'
     , L: 'iYYYY/iMM/iDD'
     , LL: 'iD iMMMM iYYYY'
     , LLL: 'iD iMMMM iYYYY LT'
@@ -21,7 +22,7 @@ moment.locale('en'
 )
 
 describe('moment', function() {
-	
+
   describe('#parse', function() {
     it('should parse gregorian dates', function() {
       var m = moment('1981/8/17 07:10:20', 'YYYY/M/D hh:mm:ss')
@@ -40,7 +41,7 @@ describe('moment', function() {
       m = moment('08 36 17', 'MM iYY DD')
       m.format('YYYY-MM-DD').should.be.equal('2014-08-17')
     })
-	 
+
     it('should parse when only Hijri month is in the format', function() {
       var m = moment('1981 5 17', 'YYYY iM D')
       m.format('YYYY-MM-DD').should.be.equal('1981-03-17')
@@ -62,12 +63,12 @@ describe('moment', function() {
       m = moment('1990 Sha’ban 25', 'YYYY iMMMM D')
       m.format('YYYY-MM-DD').should.be.equal('1990-03-25')
     })
-	 
+
     it('should parse when only Hijri date is in the format', function() {
       var m = moment('1981 26 8', 'YYYY iD M')
       m.format('YYYY-MM-DD').should.be.equal('1981-08-01')
     })
-	 
+
     it('should parse when Hijri year and month are in the format', function() {
       var m = moment('17 1436 5', 'D iYYYY iM')
       m.format('YYYY-MM-DD').should.be.equal('2015-02-17')
@@ -265,6 +266,7 @@ describe('moment', function() {
 
     it('should work with long date formats too', function() {
       var m = moment('1981-08-17', 'YYYY-MM-DD')// TODO: Not working
+      m.format('LTS').should.be.equal('12:00:00 AM')
       m.format('LT').should.be.equal('12:00 AM')
       m.format('L').should.be.equal('1401/10/17')
       m.format('l').should.be.equal('1401/10/17')
@@ -291,7 +293,7 @@ describe('moment', function() {
       h.hm.should.be.equal(6);
       h.hd.should.be.equal(19);
     })
-	 
+
     it('should convert 1419-12-15 to 1999-04-01', function() {
       var g = moment.iConvert.toGregorian(1419, 11, 15);
       g.gy.should.be.equal(1999);
@@ -376,7 +378,7 @@ describe('moment', function() {
       moment.fn.iYear.should.be.equal(moment.fn.iYears)
     })
   })
-	
+
   describe('#iMonth', function() {
     it('should return Hijri month', function() {
       var m = moment('1981-08-17', 'YYYY-MM-DD')
@@ -477,7 +479,7 @@ describe('moment', function() {
       m.format('iYY/iM/iD').should.be.equal('37/12/30')
     })
   })
-  
+
   describe('#iDaysInMonth', function() {
     it('should return Hijri days in Month', function() {
       var m = moment('1981-08-17', 'YYYY-MM-DD')
@@ -488,5 +490,5 @@ describe('moment', function() {
 
   })
 
-	
+
 })
