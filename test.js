@@ -42,50 +42,6 @@ describe('moment', function() {
       m.format('YYYY-MM-DD').should.be.equal('2014-08-17')
     })
 
-    it('should parse when only Hijri month is in the format', function() {
-      var m = moment('1981 5 17', 'YYYY iM D')
-      m.format('YYYY-MM-DD').should.be.equal('1981-03-17')
-    })
-    it('should parse when only Hijri month is in the format', function() {
-      var m = moment('1990 08 25', 'YYYY iM D')
-      m.format('YYYY-MM-DD').should.be.equal('1990-03-25')
-    })
-
-    it('should parse when only Hijri month string is in the format', function() {
-      var m = moment('1981 Raj 17', 'YYYY iMMM D')
-      m.format('YYYY-MM-DD').should.be.equal('1981-03-17')
-      m = moment('1981 Rajab 17', 'YYYY iMMMM D')
-      m.format('YYYY-MM-DD').should.be.equal('1981-03-17')
-    })
-    it('should parse when only Hijri month string is in the format', function() {
-      var m = moment('1990 Sha 25', 'YYYY iMMM D')
-      m.format('YYYY-MM-DD').should.be.equal('1990-03-25')
-      m = moment('1990 Sha’ban 25', 'YYYY iMMMM D')
-      m.format('YYYY-MM-DD').should.be.equal('1990-03-25')
-    })
-
-    it('should parse when only Hijri date is in the format', function() {
-      var m = moment('1981 26 8', 'YYYY iD M')
-      m.format('YYYY-MM-DD').should.be.equal('1981-08-01')
-    })
-
-    it('should parse when Hijri year and month are in the format', function() {
-      var m = moment('17 1436 5', 'D iYYYY iM')
-      m.format('YYYY-MM-DD').should.be.equal('2015-02-17')
-      m = moment('1432 4', 'iYYYY iM')
-      m.format('YYYY-MM-DD').should.be.equal('2011-03-06')
-    })
-
-    it('should parse when Hijri year and date are in the format', function() {
-      var m = moment('26 1436 8', 'iD iYYYY M')
-      m.format('YYYY-MM-DD').should.be.equal('2014-08-19')
-    })
-
-    it('should parse when Hijri month and date are in the format', function() {
-      var m = moment('26 1981 5', 'iD YYYY iM')
-      m.format('YYYY-MM-DD').should.be.equal('1981-03-01')
-    })
-
     it('should parse when Hijri year, month and date are in the format', function() {
       var m = moment('26 1430 5', 'iD iYYYY iM')
       m.format('YYYY-MM-DD').should.be.equal('2009-05-21')
