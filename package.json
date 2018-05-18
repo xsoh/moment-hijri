@@ -67,6 +67,11 @@
     "eqnull": true,
     "laxbreak": true,
     "laxcomma": true,
-    "node": true
+    "node": true,
+    "-W015": false,
+    "-W016": false,
+    "-W098": false,
+    "-W099": false,
+    "-W116": false
   }
 }
