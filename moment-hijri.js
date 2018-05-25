@@ -128,7 +128,8 @@
 
 	, unitAliases = {
 		hm: 'imonth',
-		hy: 'iyear'
+		hy: 'iyear',
+		hd: 'idate'
 	}
 
 	, formatFunctions = {}
@@ -723,7 +724,9 @@
 			this.iYear(this.iYear() + val)
 		} else if (units === 'imonth') {
 			this.iMonth(this.iMonth() + val)
-		} else {
+		} else if (units === 'idate') {
+			this.iDate(this.iDate() + val)
+		}else {
 			moment.fn.add.call(this, val, units)
 		}
 		return this
@@ -741,6 +744,8 @@
 			this.iYear(this.iYear() - val)
 		} else if (units === 'imonth') {
 			this.iMonth(this.iMonth() - val)
+		} else if (units === 'idate') {
+			this.iDate(this.iDate() - val)
 		} else {
 			moment.fn.subtract.call(this, val, units)
 		}
