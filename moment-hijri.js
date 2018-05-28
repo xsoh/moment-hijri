@@ -127,6 +127,7 @@
 	, parseTokenOneOrTwoDigits = /\d\d?/, parseTokenOneToThreeDigits = /\d{1,3}/, parseTokenThreeDigits = /\d{3}/, parseTokenFourDigits = /\d{1,4}/, parseTokenSixDigits = /[+\-]?\d{1,6}/, parseTokenWord = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.?)|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i, parseTokenTimezone = /Z|[\+\-]\d\d:?\d\d/i, parseTokenT = /T/i, parseTokenTimestampMs = /[\+\-]?\d+(\.\d{1,3})?/
 
 	, unitAliases = {
+		hd: 'idate',
 		hm: 'imonth',
 		hy: 'iyear'
 	}
@@ -723,7 +724,10 @@
 			this.iYear(this.iYear() + val)
 		} else if (units === 'imonth') {
 			this.iMonth(this.iMonth() + val)
-		} else {
+		} else if (units === 'idate') {
+			this.iDate(this.iDate() + val)
+		}
+		 else {
 			moment.fn.add.call(this, val, units)
 		}
 		return this
@@ -741,6 +745,8 @@
 			this.iYear(this.iYear() - val)
 		} else if (units === 'imonth') {
 			this.iMonth(this.iMonth() - val)
+		} else if (units === 'idate') {
+			this.iDate(this.iDate() - val)
 		} else {
 			moment.fn.subtract.call(this, val, units)
 		}

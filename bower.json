@@ -1,7 +1,7 @@
 {
   "name": "moment-hijri",
   "main": "moment-hijri.js",
-  "version": "0.4.2",
+  "version": "2.1.0",
   "homepage": "https://github.com/xsoh/moment-hijri",
   "authors": [
     "Suhail Alkowaileet <xsoh.k7@gmail.com>"
@@ -27,6 +27,6 @@
     "tests"
   ],
   "dependencies": {
-    "momentjs": "~2.10.3"
+    "momentjs": "^2.22.1"
   }
 }
