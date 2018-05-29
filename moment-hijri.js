@@ -646,7 +646,7 @@
 			g = toGregorian(input, h.hm, lastDay)
 			setDate(this, g.gy, g.gm, g.gd)
 			//Workaround: sometimes moment wont set the date correctly if current day is the last in the month
-			if (this.month() != g.gm || this.date() != g.gd || this.year() != g.gy) {
+			if (this.month() !== g.gm || this.date() !== g.gd || this.year() !== g.gy) {
 				setDate(this, g.gy, g.gm, g.gd)
 			}
 			moment.updateOffset(this)
@@ -678,7 +678,7 @@
 			g = toGregorian(this.iYear(), input, lastDay)
 			setDate(this, g.gy, g.gm, g.gd)
 			//Workaround: sometimes moment wont set the date correctly if current day is the last in the month
-			if (this.month() != g.gm || this.date() != g.gd || this.year() != g.gy) {
+			if (this.month() !== g.gm || this.date() !== g.gd || this.year() !== g.gy) {
 				setDate(this, g.gy, g.gm, g.gd)
 			}
 			moment.updateOffset(this)
@@ -695,7 +695,7 @@
 			g = toGregorian(h.hy, h.hm, input)
 			setDate(this, g.gy, g.gm, g.gd)
 			//Workaround: sometimes moment wont set the date correctly if current day is the last in the month
-			if (this.month() != g.gm || this.date() != g.gd || this.year() != g.gy) {
+			if (this.month() !== g.gm || this.date() !== g.gd || this.year() !== g.gy) {
 				setDate(this, g.gy, g.gm, g.gd)
 			}
 			moment.updateOffset(this)
