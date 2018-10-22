@@ -711,7 +711,8 @@
 	}
 
 	hMoment.fn.iDaysInMonth = function () {
-		return parseInt(hMoment(this).endOf('iMonth').format('iDD'));
+		// Replace method is called in cases where the format method return arabic numerals
+		return parseInt(hMoment(this).endOf('iMonth').format('iDD').replace(/[٠١٢٣٤٥٦٧٨٩]/g, function(d) {return d.charCodeAt(0) - 1632;}));
 	}
 
 	hMoment.fn.iWeek = function (input) {
