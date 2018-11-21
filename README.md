@@ -8,7 +8,7 @@ A Hijri (Based on Umm al-Qura calculations) calendar system plugin for moment.js
 About
 -----
 
-Hijri is the Islamic lunar calendar used by Muslims everywhere to determine the proper days on which to observe the annual fasting, to attend Hajj, and to celebrate other Islamic holidays and festivals [more info at wiki](https://en.wikipedia.org/wiki/Islamic_calendar).
+Hijri is the Islamic lunar calendar used by Muslims to determine the proper days on which to observe the annual fasting, to attend Hajj, and to celebrate other Islamic holidays and festivals. More information about Hijri can be found at [wikipedia](https://en.wikipedia.org/wiki/Islamic_calendar).
 
 This plugin adds Hijri calendar support to [momentjs](http://momentjs.com) library.
 
@@ -16,9 +16,8 @@ Calendar conversion is based on the [Umm al-Qura calculations](http://www.ummulq
 
 Upgrading to 2.0.0
 ---------------
-Because of [Using 'h' specifier might cause overlap with hour's specifier](https://github.com/xsoh/moment-hijri/issues/8). 
-The specifier has been changed from `h` to `i` as  a prefix. So for example in the previous version to get the four digit year 
-we use `hYYYY`. In version 2.0 or above you should replace it with `iYYYY` and so on.
+Because of [Using 'h' specifier might cause overlap with hour's specifier](https://github.com/xsoh/moment-hijri/issues/8), the specifier has been changed from `h` to `i` as a prefix. For example in the previous version to get the four digit year, 
+`hYYYY` will be used. In version 2.0 or above it should be replaced by `iYYYY`.
 
 Where to use it?
 ---------------
@@ -63,7 +62,7 @@ define(["moment-hijri"], function (moment) {
 API
 ---
 
-This plugin tries to mimic `momentjs` api. Basically, when you want to format or parse a string, just add a `i` to the format token like 'iYYYY' or 'iM'. For example:
+This plugin tries to mimic `momentjs` api. Basically, when formatting or parsing a string, add an `i` to the format token such as 'iYYYY' or 'iM'. For example:
 
 ```js
 m = moment('1410/8/28', 'iYYYY/iM/iD'); // Parse a Hijri date.
@@ -99,7 +98,7 @@ moment('2014-11-28 16:40:00', 'YYYY-M-D HH:mm:ss').endOf('iMonth').format('iYYYY
 moment('1990 5 25', 'YYYY iM D').format('YYYY/MM/DD'); // 1990/03/25
 ```
 
-To use the Arabic locale you need to do as follow:
+To use the Arabic locale:
 - Load [moment-with-locales](http://momentjs.com/downloads/moment-with-locales.js).
 - Set the global or local locale to `ar-SA` see [here](http://momentjs.com/docs/#/i18n/changing-locale/).
 - use it normally :+1: 
