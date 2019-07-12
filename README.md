@@ -77,7 +77,8 @@ m.iWeekYear(); // 1410
 
 m.add(1, 'iYear');
 m.add(2, 'iMonth');
-m.format('iYYYY/iM/iD'); // 1411/10/28
+m.add(1, 'idate');
+m.format('iYYYY/iM/iD'); // 1411/10/29
 
 m.iMonth(11);
 m.startOf('iMonth');
