@@ -16,7 +16,7 @@
 			return root.moment
 		})
 	} else if (typeof exports === 'object') {
-		module.exports = factory(require('moment'))
+		module.exports = factory(require('moment/moment'))
 	} else {
 		root.moment = factory(root.moment)
 	}
