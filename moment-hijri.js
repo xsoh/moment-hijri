@@ -242,6 +242,12 @@
 		}
 	}, i
 
+	// Adjustment of the day count for month(5) and month(6) months for the year (1446) as per Umm al-Qura Calendar.
+	// Updated month(5) to have 29 days and month(6) to have 30 days.
+	let indexOfMonth_5 = getNewMoonMJDNIndex(1446, 5);
+	console.log(indexOfMonth_5);
+	ummalqura.ummalquraData[indexOfMonth_5] -= 1;
+
 	function padToken(func, count) {
 		return function (a) {
 			return leftZeroFill(func.call(this, a), count)
