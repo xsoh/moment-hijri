@@ -14,7 +14,17 @@ This plugin adds Hijri calendar support to [momentjs](http://momentjs.com) libra
 
 Calendar conversion is based on the [Umm al-Qura calculations](http://www.ummulqura.org.sa/).
 
-Upgrading to 2.0.0
+Upgrading to 3.0.0 [31-Oct-2024 of 28-Rabii_2-1446]
+---------------
+Adjusted dates has been changed to match ummalqura:-
+- 1446-05-29 (old 30)
+- 1446-06-30 (old 29)
+- 1485-09-29 (old 30)
+- 1485-10-30 (old 29)
+
+
+
+### Upgrading to 2.0.0
 ---------------
 Because of [Using 'h' specifier might cause overlap with hour's specifier](https://github.com/xsoh/moment-hijri/issues/8), the specifier has been changed from `h` to `i` as a prefix. For example in the previous version to get the four digit year, 
 `hYYYY` will be used. In version 2.0 or above it should be replaced by `iYYYY`.
