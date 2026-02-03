@@ -1,4 +1,4 @@
-[![NPM version][npm-version-image]][npm-url] [![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url]
+[![NPM version][npm-version-image]][npm-url] [![MIT License][license-image]][license-url] [![CI](https://github.com/xsoh/moment-hijri/workflows/CI/badge.svg)](https://github.com/xsoh/moment-hijri/actions)
 
 moment-hijri
 ==============
@@ -142,6 +142,3 @@ MIT
 
 [npm-url]: https://npmjs.org/package/moment-hijri
 [npm-version-image]: http://img.shields.io/npm/v/moment-hijri.svg?style=flat
-
-[travis-url]: https://travis-ci.org/xsoh/moment-hijri
-[travis-image]: https://travis-ci.org/xsoh/moment-hijri.svg?style=flat
