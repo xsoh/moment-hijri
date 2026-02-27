@@ -754,6 +754,7 @@
 			return toHijri(this.year(), this.month(), this.date()).hm
 		}
 	}
+	
 
 	hMoment.fn.iDate = function (input) {
 		var h, g
@@ -778,7 +779,14 @@
 	}
 
 	hMoment.fn.iDaysInMonth = function () {
-		return parseInt(hMoment(this).endOf('iMonth').format('iDD'));
+		 var x = hMoment(this).endOf('iMonth').format('iDD');
+		 var arToEn = {'٠':0 ,'١':1 ,'٢':2 , '٣':3 , '٤':4 , '٥' :5 , '٦':6 , '٧' :7  , '٨':8 ,  '٩':9   }
+		
+		 for (const c of x) {
+            x = x.replace(c, (arToEn[c] + ""))
+         }
+		
+		return parseInt(x);
 	}
 
 	hMoment.fn.iWeek = function (input) {
