@@ -317,6 +317,7 @@
       Languages
   ************************************/
 	extend(getPrototypeOf(moment.localeData()), {
+		_abbr: 'ar-sa',
 		_iMonths: ['Muharram'
                 , 'Safar'
                 , 'Rabi\' al-Awwal'
