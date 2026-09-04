@@ -58,6 +58,17 @@ describe('moment', function() {
       moment(m.format(f), f).isSame(m).should.be.true
     })
 
+    it('should accept non-string input alongside a format without crashing', function() {
+      // Regression tests for #56 (moment object) and #14 (Date object):
+      // makeMoment used to feed any input through the string parser.
+      var m = moment(moment('2020-05-16'), 'YYYY-MM-DD')
+      m.format('YYYY-MM-DD').should.be.equal('2020-05-16')
+      m.format('iYYYY/iM/iD').should.be.equal('1441/9/23')
+      var d = moment(new Date(2020, 4, 16), 'iYYYY-iMM-iDD')
+      d.format('YYYY-MM-DD').should.be.equal('2020-05-16')
+      d.format('iYYYY/iM/iD').should.be.equal('1441/9/23')
+    })
+
     it('should be able to parse in utc', function() {
       var m = moment.utc('1436/8/20 07:10:20', 'iYYYY/iM/iD hh:mm:ss')
       m.format('YYYY-MM-DD hh:mm:ss Z').should.be.equal('2015-06-07 07:10:20 +00:00')

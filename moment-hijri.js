@@ -648,7 +648,7 @@
 		if (format) {
 			if (isArray(format)) {
 				return makeDateFromStringAndArray(config, utc)
-			} else {
+			} else if (typeof config._i === 'string') {
 				date = makeDateFromStringAndFormat(config)
 				removeParsedTokens(config)
 				format = 'YYYY-MM-DD-' + config._f
@@ -657,6 +657,8 @@
 					+ leftZeroFill(date[2], 2) + '-'
 					+ config._i
 			}
+			// Non-string input (moment, Date, ...): nothing string-like to
+			// parse, so fall through and let moment core handle it (#56, #14).
 		}
 		if (utc)
 			m = moment.utc(input, format, lang)
