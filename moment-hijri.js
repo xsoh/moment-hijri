@@ -354,14 +354,13 @@
 
 		,
 		iMonthsParse: function (monthName) {
-			var i, mom, regex
+			var i, regex
 			if (!this._iMonthsParse)
 				this._iMonthsParse = []
 			for (i = 0; i < 12; i += 1) {
 				// Make the regex if we don't have it already.
 				if (!this._iMonthsParse[i]) {
-					mom = hMoment([2000, (2 + i) % 12, 25])
-					regex = '^' + this.iMonths(mom, '') + '$|^' + this.iMonthsShort(mom, '') + '$'
+					regex = '^' + this._iMonths[i] + '$|^' + this._iMonthsShort[i] + '$'
 					this._iMonthsParse[i] = new RegExp(regex.replace('.', ''), 'i')
 				}
 				// Test the regex.
@@ -727,10 +726,10 @@
 		var lastDay, h, g
 		if (input != null) {
 			if (typeof input === 'string') {
+				// iMonthsParse returns a 0-based month index, matching the
+				// numeric input convention used below (see #60).
 				input = this.localeData().iMonthsParse(input)
-				if(input >= 0) {
-					input -= 1
-				} else {
+				if (input == null || input < 0) {
 					return this
 				}
 			}
