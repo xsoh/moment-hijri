@@ -14,6 +14,16 @@ This plugin adds Hijri calendar support to [momentjs](http://momentjs.com) libra
 
 Calendar conversion is based on the [Umm al-Qura calculations](http://www.ummulqura.org.sa/).
 
+Supported range
+---------------
+
+Conversions are supported for **1 Muharram 1356 AH (1937-03-14) through the end of 1500 AH
+(2077-11-16)**. The library ships an embedded Umm al-Qura month-length table covering exactly
+this span, so dates outside it cannot be converted: parsing or formatting out-of-range dates
+yields `Invalid Date` / `NaN` fields rather than meaningful values. If you work near the edges,
+validate inputs against this range first (see [#27](https://github.com/xsoh/moment-hijri/issues/27),
+[#53](https://github.com/xsoh/moment-hijri/issues/53)).
+
 Upgrading to 3.0.0 [31-Oct-2024 of 28-Rabii_2-1446]
 ---------------
 Adjusted dates has been changed to match ummalqura:-
