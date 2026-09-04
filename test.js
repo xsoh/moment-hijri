@@ -91,6 +91,21 @@ describe('moment', function() {
       m = moment('60 5 30', ['iYY iM iD', 'YY M D'])
       m.format('iYY-iMM-iDD').should.be.equal('60-05-30')
     })
+
+    it('should round-trip Hijri month names without shifting months', function() {
+      // Regression test for #60: iMonthsParse mapped names to the wrong
+      // indices, so parsing '22 Shw 1440' came back a month later.
+      var input = '22 Shw 1440'
+        , output = moment(input, 'iDD iMMM iYYYY').format('iDD iMMM iYYYY')
+      output.should.be.equal(input)
+      // Hyphenated abbreviations (Rab-I, Dhu-Q, ...) are excluded: the word
+      // tokenizer splits on '-', which predates this fix.
+      var months = ['Muh', 'Saf', 'Raj', 'Sha', 'Ram', 'Shw']
+        , expected = ['01', '02', '07', '08', '09', '10']
+      months.forEach(function (name, index) {
+        moment('15 ' + name + ' 1440', 'iDD iMMM iYYYY').format('iMM').should.be.equal(expected[index])
+      })
+    })
   })
 
   describe('#format', function() {
