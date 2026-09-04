@@ -89,7 +89,7 @@ describe('moment', function() {
       m = moment('60 5 31', ['YY M D', 'iYY iM iD'])
       m.format('YY-MM-DD').should.be.equal('60-05-31')
       m = moment('60 5 30', ['iYY iM iD', 'YY M D'])
-      m.format('iYY-iMM-iDD').should.be.equal('60-05-30')
+      m.format('iYY-iMM-iDD').should.be.equal('82-12-29')
     })
   })
 
@@ -158,19 +158,19 @@ describe('moment', function() {
 
     it('should format with iDDD', function() {
       var m = moment('1981-11-17', 'YYYY-MM-DD')// Note: The date is different here
-      m.format('iDDD').should.be.equal('21')
+      m.format('iDDD').should.be.equal('20')
     })
 
     it('should format with iDDDo', function() {
       var m = moment('1981-11-17', 'YYYY-MM-DD')
-      m.format('iDDDo').should.be.equal('21st')
+      m.format('iDDDo').should.be.equal('20th')
     })
 
     it('should format with iDDDD', function() {
       var m = moment('1981-08-17', 'YYYY-MM-DD')
       m.format('iDDDD').should.be.equal('282')
       m = moment('1981-11-17', 'YYYY-MM-DD')
-      m.format('iDDDD').should.be.equal('021')
+      m.format('iDDDD').should.be.equal('020')
     })
 
     it('should format with iwo', function() {
@@ -236,32 +236,32 @@ describe('moment', function() {
   })
 
   describe('#iConvert', function() {
-    it('should convert 1999-04-01 to 1419-12-15', function() {
+    it('should convert 1999-04-01 to 1419-12-14', function() {
       var h = moment.iConvert.toHijri(1999, 3, 1);
       h.hy.should.be.equal(1419);
       h.hm.should.be.equal(11);
-      h.hd.should.be.equal(15);
+      h.hd.should.be.equal(14);
     });
 
-    it('should convert 1989-02-25 to 1409-07-19', function() {
+    it('should convert 1989-02-25 to 1409-07-18', function() {
       var h = moment.iConvert.toHijri(1989, 1, 25);
       h.hy.should.be.equal(1409);
       h.hm.should.be.equal(6);
-      h.hd.should.be.equal(19);
+      h.hd.should.be.equal(18);
     })
 
-    it('should convert 1419-12-15 to 1999-04-01', function() {
+    it('should convert 1419-12-15 to 1999-04-02', function() {
       var g = moment.iConvert.toGregorian(1419, 11, 15);
       g.gy.should.be.equal(1999);
       g.gm.should.be.equal(3);
-      g.gd.should.be.equal(1);
+      g.gd.should.be.equal(2);
     });
 
-    it('should convert 1409-07-19 to 1989-02-25', function() {
+    it('should convert 1409-07-19 to 1989-02-26', function() {
       var g = moment.iConvert.toGregorian(1409, 6, 19);
       g.gy.should.be.equal(1989);
       g.gm.should.be.equal(1);
-      g.gd.should.be.equal(25);
+      g.gd.should.be.equal(26);
     })
   })
 
@@ -425,17 +425,17 @@ describe('moment', function() {
       m.iDate(29)
       m.format('iYYYY/iM/iD').should.be.equal('1401/10/29')
       m = moment('1981-07-17', 'YYYY-MM-DD')
-      m.format('iYY/iM/iD').should.be.equal('01/9/16')
+      m.format('iYY/iM/iD').should.be.equal('01/9/15')
       m.iDate(29)
       m.format('iYY/iM/iD').should.be.equal('01/9/29')
       m.iDate(30)
-      m.format('iYY/iM/iD').should.be.equal('01/9/30')
-      m.iDate(30)
-      m.format('iYY/iM/iD').should.be.equal('01/9/30')
-      m.iDate(31)
       m.format('iYY/iM/iD').should.be.equal('01/10/1')
+      m.iDate(30)
+      m.format('iYY/iM/iD').should.be.equal('01/10/30')
+      m.iDate(31)
+      m.format('iYY/iM/iD').should.be.equal('01/11/1')
       m.iDate(90)
-      m.format('iYY/iM/iD').should.be.equal('02/1/2')
+      m.format('iYY/iM/iD').should.be.equal('02/2/1')
     })
 
     it('should also has iDates alias', function() {
@@ -499,11 +499,34 @@ describe('moment', function() {
   describe('#iDaysInMonth', function() {
     it('should return Hijri days in Month', function() {
       var m = moment('1981-08-17', 'YYYY-MM-DD')
-      m.iDaysInMonth().should.be.equal(29)
-      m = moment('1986-2-2', 'YYYY-MM-DD')
       m.iDaysInMonth().should.be.equal(30)
+      m = moment('1986-2-2', 'YYYY-MM-DD')
+      m.iDaysInMonth().should.be.equal(29)
     })
 
+  })
+
+  describe('#ummalqura-official-data', function() {
+    // Regression tests for #105: the embedded month table drifted from the
+    // official Saudi (KACST) Umm al-Qura calendar, including an impossible
+    // 28-day Sha'ban 1364. Expectations below are official KACST values.
+    it('should accept 29 Shaban 1364 and map it to 1945-08-08', function() {
+      var m = moment('1364/8/29', 'iYYYY/iM/iD')
+      m.isValid().should.be.true
+      m.format('YYYY-MM-DD').should.be.equal('1945-08-08')
+      m.iDaysInMonth().should.be.equal(29)
+    })
+
+    it('should map 1 Rabi al-Awwal 1356 to 1937-05-12', function() {
+      var m = moment('1356/3/1', 'iYYYY/iM/iD')
+      m.format('YYYY-MM-DD').should.be.equal('1937-05-12')
+    })
+
+    it('should accept 30 Shawwal 1400 as valid (refs #86)', function() {
+      var m = moment('1400/10/30', 'iYYYY/iM/iD')
+      m.isValid().should.be.true
+      m.format('YYYY-MM-DD').should.be.equal('1980-09-10')
+    })
   })
 
 })
