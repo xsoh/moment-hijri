@@ -521,6 +521,12 @@ describe('moment', function() {
       var m = moment('1356/3/1', 'iYYYY/iM/iD')
       m.format('YYYY-MM-DD').should.be.equal('1937-05-12')
     })
+
+    it('should accept 30 Shawwal 1400 as valid (refs #86)', function() {
+      var m = moment('1400/10/30', 'iYYYY/iM/iD')
+      m.isValid().should.be.true
+      m.format('YYYY-MM-DD').should.be.equal('1980-09-10')
+    })
   })
 
 })
