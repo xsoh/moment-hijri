@@ -496,6 +496,15 @@ describe('moment', function() {
     })
   })
 
+  describe('#isValid', function() {
+    it('should reject a Hijri day the month does not have', function() {
+      moment('1436/1/30', 'iYYYY/iMM/iDD').isValid().should.be.false
+      moment('1436/2/30', 'iYYYY/iMM/iDD').isValid().should.be.true
+      moment('1436/1/30', ['iYYYY/iMM/iDD']).isValid().should.be.false
+      moment('1436/2/30', ['iYYYY/iMM/iDD']).isValid().should.be.true
+    })
+  })
+
   describe('#iDaysInMonth', function() {
     it('should return Hijri days in Month', function() {
       var m = moment('1981-08-17', 'YYYY-MM-DD')

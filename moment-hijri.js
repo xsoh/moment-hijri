@@ -584,7 +584,8 @@
 			}
 		}
 
-		return bestMoment
+		// No format gave a valid date: return the last attempt, which is invalid, like moment does.
+		return bestMoment || tempMoment
 	}
 
 	function removeParsedTokens(config) {
@@ -663,7 +664,8 @@
 		else
 			m = moment(input, format, lang)
 		if (config._isValid === false)
-			m._isValid = false
+			// moment's isValid() recomputes _isValid from its parsing flags, so set the flag it reads.
+			m._pf.userInvalidated = true
 		m._hDiff = config._hDiff || 0
 		hm = objectCreate(hMoment.fn)
 		extend(hm, m)
