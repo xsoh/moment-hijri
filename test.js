@@ -504,6 +504,12 @@ describe('moment', function() {
       m.iDaysInMonth().should.be.equal(30)
     })
 
+    it('should return Hijri days in Month in locales with Arabic digits', function() {
+      var m = moment('1436-1-1', 'iYYYY-iM-iD').locale('ar-sa')
+      m.iDaysInMonth().should.be.equal(moment('1436-1-1', 'iYYYY-iM-iD').iDaysInMonth())
+      m.iDaysInMonth().should.be.within(29, 30)
+    })
+
   })
 
 })
