@@ -503,6 +503,15 @@ describe('moment', function() {
       moment('1436/1/30', ['iYYYY/iMM/iDD']).isValid().should.be.false
       moment('1436/2/30', ['iYYYY/iMM/iDD']).isValid().should.be.true
     })
+
+    it('should reject a Hijri month or day out of range', function() {
+      moment('1436/13/1', 'iYYYY/iMM/iDD').isValid().should.be.false
+      moment('1436/0/1', 'iYYYY/iMM/iDD').isValid().should.be.false
+      moment('1436/1/0', 'iYYYY/iMM/iDD').isValid().should.be.false
+      moment('1436/12/29', 'iYYYY/iMM/iDD').isValid().should.be.true
+      moment('1436', 'iYYYY').isValid().should.be.true
+      moment('1436/5', 'iYYYY/iM').isValid().should.be.true
+    })
   })
 
   describe('#iDaysInMonth', function() {

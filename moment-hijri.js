@@ -518,8 +518,10 @@
 			return [0, 0, 1]
 		hy = hy || 0
 		hm = hm || 0
-		hd = hd || 1
-		if (hd < 1 || hd > hMoment.iDaysInMonth(hy, hm))
+		// A parsed day of 0 is invalid, so only default the day when it is missing.
+		if (hd == null)
+			hd = 1
+		if (hm < 0 || hm > 11 || hd < 1 || hd > hMoment.iDaysInMonth(hy, hm))
 			config._isValid = false
 		g = toGregorian(hy, hm, hd)
 		h = toHijri(g.gy, g.gm, g.gd)
