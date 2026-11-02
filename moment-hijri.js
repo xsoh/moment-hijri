@@ -778,7 +778,7 @@
 	}
 
 	hMoment.fn.iDaysInMonth = function () {
-		return parseInt(hMoment(this).endOf('iMonth').format('iDD'));
+		return hMoment(this).endOf('iMonth').iDate();
 	}
 
 	hMoment.fn.iWeek = function (input) {
