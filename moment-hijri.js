@@ -518,8 +518,10 @@
 			return [0, 0, 1]
 		hy = hy || 0
 		hm = hm || 0
-		hd = hd || 1
-		if (hd < 1 || hd > hMoment.iDaysInMonth(hy, hm))
+		// A parsed day of 0 is invalid, so only default the day when it is missing.
+		if (hd == null)
+			hd = 1
+		if (hm < 0 || hm > 11 || hd < 1 || hd > hMoment.iDaysInMonth(hy, hm))
 			config._isValid = false
 		g = toGregorian(hy, hm, hd)
 		h = toHijri(g.gy, g.gm, g.gd)
@@ -584,7 +586,8 @@
 			}
 		}
 
-		return bestMoment
+		// No format gave a valid date: return the last attempt, which is invalid, like moment does.
+		return bestMoment || tempMoment
 	}
 
 	function removeParsedTokens(config) {
@@ -663,7 +666,8 @@
 		else
 			m = moment(input, format, lang)
 		if (config._isValid === false)
-			m._isValid = false
+			// moment's isValid() recomputes _isValid from its parsing flags, so set the flag it reads.
+			m._pf.userInvalidated = true
 		m._hDiff = config._hDiff || 0
 		hm = objectCreate(hMoment.fn)
 		extend(hm, m)
